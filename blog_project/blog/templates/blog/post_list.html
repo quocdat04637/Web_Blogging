@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %}All posts{% endblock %}
+{% block content %}
+    <h1>All posts</h1>
+    <div class="newest-post">
+        {% for post in posts %}
+            <div style="padding: 10px;">
+                <img src="{{ post.image.url }}" alt="Error" width="100px" height="100px">
+                <a href="{% url 'post_detail' post.pk %}" class="text-dark text-decoration-none">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.author }} - {{ post.created_at }}</p>
+                </a>
+            </div>
+
+            {% if user.is_authenticated %}
+                {% if user.role == 'editor' and post.author == request.user %}
+                    <!-- Nút chỉnh sửa (tuỳ chọn) -->
+                    <a href="{% url 'edit_post' post.pk %}" class="btn btn-primary">Edit</a>
+            
+                    <!-- Nút xoá (tuỳ chọn) -->
+                    <a href="{% url 'delete_post' post.pk %}" class="btn btn-primary">Delete</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
