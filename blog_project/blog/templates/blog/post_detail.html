@@ -103,7 +103,7 @@
                             <img src="{{ related_post.image.url }}" alt="Error" width="100px" height="100px" style="padding: 10px;">
                             <a href="{% url 'post_detail' related_post.pk %}" class="text-dark text-decoration-none">
                                 <h2>{{ related_post.title }}</h2>
-                                <p>{{ post.author }}</p>
+                                <p>{{ related_post.author }}</p>
                             </a>
                         </div>
                     {% endfor %}
