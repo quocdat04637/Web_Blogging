@@ -66,6 +66,15 @@ urlpatterns = [
     # Đường dẫn để "like" Comment
     path('like_comment/<int:pk>/', views.like_comment, name='like_comment'),
 
+    path('about/', views.about, name='about'),
+
+    path('contact/', views.contact, name='contact'),
+
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+
+    path('faq/', views.faq, name='faq'),
+
+    path('term-of-use/', views.term_of_use, name='term_of_use'),
 ]
 
 

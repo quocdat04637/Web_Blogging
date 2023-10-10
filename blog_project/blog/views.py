@@ -365,3 +365,17 @@ def like_comment(request, pk):
 
     return JsonResponse({'message': 'Liked successfully', 'likes': comment.likes})
 
+def about(request):
+    return render(request, 'blog/about.html')
+
+def contact(request):
+    return render(request, 'blog/contact.html')
+
+def privacy_policy(request):
+    return render(request, 'blog/privacy_policy.html')
+
+def faq(request):
+    return render(request, 'blog/faq.html')
+
+def term_of_use(request):
+    return render(request, 'blog/term_of_use.html')

@@ -152,9 +152,6 @@ input[type="text"], input[type="email"], input[type="password"], input[type="con
     opacity: 1; /* Khi hover, hiển thị overlay */
 }
 
-.post-social-links a:hover {
-    background-color: #4caf50;
-}
 
 .tag-links a {
     text-decoration: none;

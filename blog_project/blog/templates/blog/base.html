@@ -12,6 +12,7 @@
     <link rel="icon" href="/blog_project/blog/static/images/title-images/favicon.ico" type="image/x-icon">
     {% block head %}{% endblock %}
     <style>
+        
         .footer-menu, .footer-link {
             padding-top: 30px;
         }
@@ -23,7 +24,7 @@
         }
 
         .footer-menu a:hover{
-           opacity: 0.5;
+           color: violet !important;
         }
 
         .icon-link a {
@@ -147,11 +148,11 @@
     <footer class="mt-4 bg-success">
         <div class="container footer" style="display: flex;">
             <div class="footer-menu" style="width: 30%; display:inline-block;">
-                <a href="#">Contact Us</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Frequently Asked Question</a>
-                <a href="#">About Us</a>
-                <a href="#">Terms of Use</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'contact' %}">Contact Us</a>
+                <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+                <a href="{% url 'faq' %}">Frequently Asked Question</a>
+                <a href="{% url 'term_of_use' %}">Terms of Use</a>
             </div>
 
             <div class="footer-link" style="width: 70%">

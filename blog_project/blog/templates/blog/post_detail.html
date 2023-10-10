@@ -29,6 +29,17 @@
             width: 100%; /* Đặt chiều rộng cho textarea là 100% của form */
             box-sizing: border-box; /* Đảm bảo chiều rộng bao gồm cả padding và border */
         }
+
+        .post-social-links a {
+            color: black;
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .post-social-links a:hover {
+            color: violet !important;
+        }
+
       
     
         /* Quy tắc CSS cho màn hình mobile */
@@ -117,15 +128,15 @@
         <!-- Thêm social links cho việc chia sẻ bài viết -->
         <div class="container block2">
             <div class="post-social-links" style="font-size: 40px; padding: 20px 0;">
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-dark bg-info rounded-circle" style="margin: 10px;">
-                    <i class="fa-brands fa-facebook-f"></i>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-facebook"></i>
                 </a>
                 
-                <a href="https://www.tiktok.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-dark bg-info rounded-circle" style="margin: 10px;">
+                <a href="https://www.tiktok.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-tiktok"></i>
                 </a>
               
-                <a href="https://www.instagram.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-dark bg-info rounded-circle" style="margin: 10px;">
+                <a href="https://www.instagram.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
             </div>

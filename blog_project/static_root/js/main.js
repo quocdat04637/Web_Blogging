@@ -65,25 +65,3 @@ $(document).ready(function() {
 });
 
 
-// Sử dụng JavaScript để xử lý sự kiện hover và gửi yêu cầu AJAX để lấy danh sách các tags liên quan từ máy chủ. Sau đó, hiển thị danh sách này trong div tương ứng.
-document.addEventListener("DOMContentLoaded", function () {
-    const categoryLinks = document.querySelectorAll(".nav-item.dropdown .dropdown-menu a");
-    categoryLinks.forEach(function (link) {
-        link.addEventListener("mouseenter", function () {
-            const categoryId = link.getAttribute("href").split("/").pop(); // Lấy ID của category từ URL
-            const tagsDiv = document.getElementById("tags-" + categoryId);
-            // Gửi yêu cầu AJAX để lấy danh sách các tags liên quan từ máy chủ
-            fetch(`/get_related_tags/${categoryId}/`)
-                .then((response) => response.json())
-                .then((data) => {
-                    tagsDiv.innerHTML = "<strong>Related Tags:</strong>";
-                    data.tags.forEach(function (tag) {
-                        const tagLink = document.createElement("a");
-                        tagLink.href = `/tag_detail/${tag.pk}/`;
-                        tagLink.innerText = tag.name;
-                        tagsDiv.appendChild(tagLink);
-                    });
-                });
-        });
-    });
-});
