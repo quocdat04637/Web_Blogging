@@ -42,7 +42,7 @@ class Category(models.Model):
 # Model cho bài viết (Post)
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    content = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='post_images/')  # Trường hình ảnh
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

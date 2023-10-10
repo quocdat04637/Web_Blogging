@@ -25,7 +25,7 @@
                         <a href="{% url 'edit_post' post.pk %}" class="btn btn-info">Edit</a>
                 
                         <!-- Nút xoá (tuỳ chọn) -->
-                        <a href="{% url 'delete_post' post.pk %}" class="btn btn-info">Delete</a>
+                        <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger">Delete</a>
                     </div>
                 </a>
             {% endfor %}

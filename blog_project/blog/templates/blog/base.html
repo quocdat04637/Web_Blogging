@@ -11,6 +11,43 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="icon" href="/blog_project/blog/static/images/title-images/favicon.ico" type="image/x-icon">
     {% block head %}{% endblock %}
+    <style>
+        .footer-menu, .footer-link {
+            padding-top: 30px;
+        }
+        .footer-menu a {
+            text-decoration: none;
+            color:mediumseagreen;
+            font-weight: bold;
+            display: block;
+        }
+
+        .footer-menu a:hover{
+           opacity: 0.5;
+        }
+
+        .icon-link a {
+            text-decoration: none;
+            color:black;
+            font-size: 30px;
+            margin-right: 10px;
+        }
+
+        .icon-link a:hover {
+           color: violet;
+        }
+
+        @media screen and (max-width: 990px){
+            .footer-menu, .footer-link {
+                width: 100% !important;
+            }
+
+            .footer {
+                display: block !important;
+            }
+        }
+
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -107,8 +144,33 @@
     </div>
 
     <!-- Footer -->
-    <footer class="container text-center mt-4 ">
-        &copy; 2023 My Blog - Group 2 - NT208.O11.ATCL
+    <footer class="mt-4 bg-success">
+        <div class="container footer" style="display: flex;">
+            <div class="footer-menu" style="width: 30%; display:inline-block;">
+                <a href="#">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Frequently Asked Question</a>
+                <a href="#">About Us</a>
+                <a href="#">Terms of Use</a>
+            </div>
+
+            <div class="footer-link" style="width: 70%">
+                <h3>About us</h3>
+                <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites, at no cost to you.</p>
+
+                <h3>Follow us</h3>
+                <div class="icon-link">              
+                    <a href="https://www.facebook.com/wetheparentsSAY/"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/intergreateducationgroup/"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/wetheparents_/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://twitter.com/i/flow/login?redirect_after_login=%2FwetheparentsSAY%2F"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copy-rights text-center bg-dark text-white">
+            &copy; 2023 My Blog - Group 2 - NT208.O11.ATCL
+        </div>
     </footer>
 
     <!-- Link tới các file JavaScript của Bootstrap 5 (popper.js và Bootstrap) -->

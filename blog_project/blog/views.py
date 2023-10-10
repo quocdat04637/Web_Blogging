@@ -42,8 +42,28 @@ def home(request):
 
 def post_list(request):
     # Logic để lấy danh sách bài viết từ CSDL và hiển thị lên trang web
-    posts = Post.objects.order_by('-created_at').all()
-    return render(request, 'blog/post_list.html', {'posts': posts})
+    posts  = Post.objects.order_by('-created_at')
+
+    authors = User.objects.filter(role='editor')
+
+    categories = Category.objects.all()
+
+    # Xử lý tham số truy vấn
+    filter_author = request.GET.get('filter_author')
+    filter_category = request.GET.get('filter_category')
+    filter_date = request.GET.get('filter_date')
+
+    if filter_author:
+        # Lọc theo tác giả nếu filter_author có giá trị
+        posts = posts.filter(author__id=filter_author)
+    if filter_category:
+        # Lọc theo thể loại nếu filter_category có giá trị
+        posts = posts.filter(category__id=filter_category)
+    if filter_date:
+        # Lọc theo ngày đăng nếu filter_date có giá trị
+        posts = posts.filter(created_at__date=filter_date)
+
+    return render(request, 'blog/post_list.html', {'posts': posts, 'authors': authors,'categories': categories,})
 
  
 def post_detail(request, pk):
