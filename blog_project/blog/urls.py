@@ -75,6 +75,9 @@ urlpatterns = [
     path('faq/', views.faq, name='faq'),
 
     path('term-of-use/', views.term_of_use, name='term_of_use'),
+
+    path('search/', views.search, name='search'),
+
 ]
 
 

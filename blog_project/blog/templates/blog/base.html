@@ -78,12 +78,13 @@
                         </ul>
                     </li>
             
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="text" style="border-radius: 30px;" placeholder="Enter keywords...">
-                        <a href="#">
-                            <i class="fa-solid fa-magnifying-glass text-dark" style="font-size: 45px;"></i>
-                        </a>
+                    <form class="d-flex" action="{% url 'search' %}" method="get">
+                        <input class="form-control me-2" type="text" name="q" style="border-radius: 30px;" placeholder="Enter keywords...">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 30px;">
+                            <i class="fa-solid fa-magnifying-glass text-dark" style="font-size: 20px;"></i>
+                        </button>
                     </form>
+                                   
                     
                 </ul>
             </div>

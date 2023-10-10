@@ -379,3 +379,17 @@ def faq(request):
 
 def term_of_use(request):
     return render(request, 'blog/term_of_use.html')
+
+
+def search(request):
+    query = request.GET.get('q')
+    results = []
+
+    if query:
+        results = Post.objects.filter(title__icontains=query)
+    context = {
+        'query': query,
+        'results': results,
+    }
+
+    return render(request, 'blog/search_results.html', context)
