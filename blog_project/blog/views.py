@@ -1,41 +1,31 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Comment, Category, Tag, User, CommentLike
-from .forms import CommentForm, PostForm, RegistrationForm, LoginForm, CategoryForm, TagForm
+from .forms import UserProfileForm, CommentForm, PostForm, RegistrationForm, LoginForm, CategoryForm, TagForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserProfileForm  # Tùy chỉnh form để cập nhật thông tin User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import update_session_auth_hash
 from datetime import datetime
 from django.http import JsonResponse
 
 # Create your views here.
-
 def base(request):
     categories = Category.objects.all()
-
     return render(request, 'blog/base.html', {'categories': categories,})
 
 def home(request):
     # Lấy 5 bài đăng mới nhất sắp xếp theo thời gian tạo giảm dần
     new_posts = Post.objects.order_by('-created_at')[:5]
-
     categories = Category.objects.all()
-
-    categories_5 = Category.objects.all()[:5]
-
     tags = Tag.objects.all()
-
     # Truyền danh sách bài đăng vào template
     context = {
         'new_posts': new_posts,
         'categories': categories,
         'tags': tags,
-        'categories_5': categories_5,
     }
-
     # Sử dụng template để render trang chủ và trả về HttpResponse
     return render(request, 'blog/home.html', context)
 
@@ -43,9 +33,7 @@ def home(request):
 def post_list(request):
     # Logic để lấy danh sách bài viết từ CSDL và hiển thị lên trang web
     posts  = Post.objects.order_by('-created_at')
-
     authors = User.objects.filter(role='editor')
-
     categories = Category.objects.all()
 
     # Xử lý tham số truy vấn
@@ -70,10 +58,8 @@ def post_detail(request, pk):
     # Logic để hiển thị chi tiết bài viết và bình luận
     post = get_object_or_404(Post, pk=pk)
     post_author = User.objects.filter(username=post.author)
-
     related_posts = Post.objects.filter(category=post.category).exclude(pk=post.pk)
-    comments = Comment.objects.filter(post=post)
-
+    comments = Comment.objects.filter(post=post).order_by('-created_at')
     # Get the tags associated with the current post
     post_tags = post.tags.all()
 
@@ -82,10 +68,6 @@ def post_detail(request, pk):
     if request.user.is_authenticated:
         for comment in comments:
             user_likes[comment.pk] = CommentLike.objects.filter(user=request.user, comment=comment).exists()
-
-
-    # Find other posts that share at least one tag with the current post
-    # related_tags_posts = Post.objects.filter(tags__in=post_tags).exclude(pk=post.pk)
 
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -137,6 +119,7 @@ def delete_post(request, pk):
     else:
         # Trả về lỗi 403 nếu không có quyền xoá
         return render(request, 'blog/post_delete_permission_denied.html')
+    
     
 def edit_post(request, pk):
     # Lấy bài viết cần chỉnh sửa từ CSDL hoặc trả về lỗi 404 nếu không tồn tại
@@ -199,7 +182,6 @@ def comment_list(request):
 def delete_comment(request, pk):
     # Lấy comment cần xoá từ CSDL hoặc trả về lỗi 404 nếu không tồn tại
     comment = get_object_or_404(Comment, pk=pk)
-
     # Kiểm tra quyền truy cập: chỉ người tạo comment hoặc admin mới được xoá
     if request.user == comment.user or request.user.is_staff:
         if request.method == 'POST':
@@ -246,26 +228,6 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'blog/login.html', {'form': form})
 
-# def user_login(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')  
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)  
-#             if user is not None:
-#                 login(request, user)
-#                 messages.success(request, 'Đăng nhập thành công!')
-#                 return redirect('home')
-#             else:
-#                 messages.error(request, 'Email hoặc mật khẩu không đúng.')
-#         else:
-#             messages.error(request, 'Email và mật khẩu không hợp lệ.')
-#     else:
-#         form = AuthenticationForm()
-#     return render(request, 'blog/login.html', {'form': form})
-
-
 
 @login_required
 def profile_view(request):
@@ -288,21 +250,14 @@ def profile_view(request):
     return render(request, 'blog/profile.html', {'form': form})
 
 
-def help(request):
-    return render(request, 'blog/help.html')
-
 
 def dashboard_view(request):
     # Lấy người dùng đang đăng nhâp
     user = request.user
-
     # Lấy tất cả bài viết của người dùng, xếp theo thứ tự mới nhất trước 
     user_posts = Post.objects.filter(author=user).order_by('-created_at')
-
     categories = Category.objects.all()
-
     tags = Tag.objects.all()
-
     return render(request, 'blog/dashboard.html', {'user_posts': user_posts, 'categories': categories, 'tags': tags,})
 
 def view_time(request):

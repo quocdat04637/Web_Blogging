@@ -7,7 +7,7 @@ class User(AbstractUser):
     # Thêm trường role
     ROLE_CHOICES = [
         ('user', 'User'),
-         ('admin', 'Admin'),
+        ('admin', 'Admin'),
         ('editor', 'Editor'),
     ]
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='user')
@@ -17,7 +17,6 @@ class User(AbstractUser):
 
     # Thêm trường image
     image = models.ImageField(upload_to='user_images/', default='#')
-
 
     def __str__(self):
         return self.username

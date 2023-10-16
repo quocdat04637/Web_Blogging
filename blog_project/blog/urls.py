@@ -51,8 +51,6 @@ urlpatterns = [
 
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 
-    path('help/', views.help, name='help'),
-
     path('dashboard_view/', views.dashboard_view, name='dashboard_view'),
 
     # Đường dẫn để tạo Category mới

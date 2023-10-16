@@ -69,7 +69,7 @@
                     <!-- Thêm các liên kết khác vào menu navbar nếu cần -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Caterories</a>
-                        <ul class="dropdown-menu" style="position: absolute; z-index: 100;">
+                        <ul class="dropdown-menu" style="z-index: 100;">
                             {% for category in categories %}
                                 <li>
                                     <a class="dropdown-item" href="{% url 'category_detail' category.pk %}">{{ category.name }}</a>
@@ -79,8 +79,8 @@
                     </li>
             
                     <form class="d-flex" action="{% url 'search' %}" method="get">
-                        <input class="form-control me-2" type="text" name="q" style="border-radius: 30px;" placeholder="Enter keywords...">
-                        <button type="submit" class="btn btn-primary" style="border-radius: 30px;">
+                        <input class="form-control me-2" type="text" name="q" style="border-radius: 40px;" placeholder="Enter keywords...">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 40px;">
                             <i class="fa-solid fa-magnifying-glass text-dark" style="font-size: 20px;"></i>
                         </button>
                     </form>

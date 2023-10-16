@@ -34,7 +34,7 @@ class PostForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),  
         required=False, # Không bắt buộc phải chọn
-        widget=forms.CheckboxSelectMultiple # Không bắt buộc phải chọn
+        widget=forms.CheckboxSelectMultiple
     )
     class Meta: 
         model = Post

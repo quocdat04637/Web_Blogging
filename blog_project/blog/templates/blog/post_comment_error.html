@@ -5,8 +5,8 @@
     <h2>Please login to continue</h2>
     <form method="post">
       {% csrf_token %}
-      <button type="submit" class="btn btn-primary">Login
-        <a href="{% url 'login' %}"></a>
+      <button type="submit">
+        <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
       </button>
       <a href="{% url 'post_detail' post.pk %}" class="btn btn-secondary">Cancel</a>
     </form>
