@@ -17,7 +17,7 @@
         }
 
         .post-detail .block2 {
-            padding-top: 50px;
+            padding-top: 30px;
             width: 30%;
         }
 
@@ -90,26 +90,28 @@
                     <button class="btn btn-primary" id="showLoginModal">Post Comment</button>
                 </form>
 
+                {% if comments %}
+                    <ul class="comment-list container-md mt-5">
+                        <h3>All comments</h3>
+                        {% for comment in comments %}
+                            <li class="container p-2 my-2 border clearfix" style="list-style-type: none;">
+                                <p><strong>{{ comment.user }}</strong> - {{ comment.created_at }}</p>
+                                <p>{{ comment.content }}</p>
+                                <p class="likes-count">Likes: {{ comment.likes }}</p>
+                                
+                                <button class="like-button text-decoration-none text-dark float-start btn btn-info" data-comment="{{ comment.pk }}"><i class="fa-solid fa-thumbs-up"></i></button>
+                                {% if request.user == comment.user or request.user.is_staff %}
+                                    <a href="{% url 'delete_comment' comment.pk %}" class="text-decoration-none text-dark float-end btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
                 
-                <ul class="comment-list container-md mt-5">
-                    <h3>All comments</h3>
-                    {% for comment in comments %}
-                        <li class="container p-2 my-2 border clearfix" style="list-style-type: none;">
-                            <p><strong>{{ comment.user }}</strong> - {{ comment.created_at }}</p>
-                            <p>{{ comment.content }}</p>
-                            <p class="likes-count">Likes: {{ comment.likes }}</p>
-                            
-                            <button class="like-button text-decoration-none text-dark float-start btn btn-info" data-comment="{{ comment.pk }}"><i class="fa-solid fa-thumbs-up"></i></button>
-                            {% if request.user == comment.user or request.user.is_staff %}
-                                <a href="{% url 'delete_comment' comment.pk %}" class="text-decoration-none text-dark float-end btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
             </div>
 
             {% if related_posts %}
-                <h2>Related Posts</h2>
+                <h2>You may also like</h2>
                 <div class="container mt-2 newest-post">
                     {% for related_post in related_posts %}
                         <div style="display: flex;">
@@ -130,14 +132,15 @@
         <!-- Thêm social links cho việc chia sẻ bài viết -->
         <div class="container block2">
             <div class="post-social-links" style="font-size: 40px; padding: 20px 0;">
+                <h2>Share this post</h2>
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-facebook"></i>
                 </a>
                 
-                <a href="https://www.tiktok.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-tiktok"></i>
+                <a href="https://www.youtube.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-youtube"></i>
                 </a>
-              
+            
                 <a href="https://www.instagram.com/share?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-instagram"></i>
                 </a>
@@ -146,7 +149,7 @@
             <div class="tag-links">
                 <h3><i class="fa-solid fa-tag"></i>Tags:</h3>
                 {% for tag in post_tags.all %}
-                    <span class="bg-warning border rounded-pill" style="width:100%;">
+                    <span class="bg-info border rounded-pill text-white" style="width:100%;">
                         <a href="{% url 'tag_detail' tag.id %}" class="text-decoration-none">
                             <b>{{ tag.name }}</b>
                             <br>

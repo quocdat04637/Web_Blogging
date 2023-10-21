@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,9 +9,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    <link rel="icon" href="/blog_project/blog/static/images/title-images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/title-images/favicon.ico'%}" type="image/x-icon">
     {% block head %}{% endblock %}
     <style>
+        .navbar {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+
+        .nav-item:hover {
+            opacity: 0.5;
+        }
+
+        .nav-item.dropdown:hover {
+            opacity: 1 !important;
+        }
         
         .footer-menu, .footer-link {
             padding-top: 30px;
@@ -66,6 +78,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'faq' %}">Support</a>
+                    </li>
                     <!-- Thêm các liên kết khác vào menu navbar nếu cần -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Caterories</a>
@@ -107,6 +128,7 @@
                                 <a href="{% url 'create_post' %}" class="list-group-item list-group-item-action bg-success" >Create my own post</a>
                             {% endif %}
 
+                            <!-- If user.role == 'admin' -->
                             {% if user.role == 'admin' %}
                                 <a href="{% url 'create_category' %}" class="list-group-item list-group-item-action bg-success" >Create new category</a>
                                 <a href="{% url 'create_tag' %}" class="list-group-item list-group-item-action bg-success" >Create new tag</a>
@@ -136,19 +158,20 @@
     </nav>
 
     <!-- Header -->
-    <header class="container my-4">
-        <h1>{% block header %}{% endblock %}</h1>
+    <header>
+        {% block header %}{% endblock %}
     </header>
+    
 
     <!-- Content -->
-    <div class="container">
+    <div>
         {% block content %}{% endblock %}
     </div>
 
     <!-- Footer -->
     <footer class="mt-4 bg-success">
         <div class="container footer" style="display: flex;">
-            <div class="footer-menu" style="width: 30%; display:inline-block;">
+            <div class="footer-menu" style="width: 30%; display:inline-block; font-size: 25px;">
                 <a href="{% url 'about' %}">About Us</a>
                 <a href="{% url 'contact' %}">Contact Us</a>
                 <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
@@ -158,7 +181,7 @@
 
             <div class="footer-link" style="width: 70%">
                 <h3>About us</h3>
-                <p>We are a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for us to earn fees by linking to Amazon.com and affiliated sites, at no cost to you.</p>
+                <p>We provide a plenty of useful posts from different style of categories. In here, you also have a chance to join with us in many interesting projects. Don't be afraid if you have any questions related to our terms and services</p>
 
                 <h3>Follow us</h3>
                 <div class="icon-link">              
