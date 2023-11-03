@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     # automatically delete old image files when a new image is uploaded.
-    'django_cleanup.apps.CleanupConfig' 
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
